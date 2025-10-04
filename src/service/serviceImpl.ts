@@ -1,5 +1,6 @@
 import { Worker } from "worker_threads";
-export class Service {
+import { IService } from "./IService";
+export class Service implements IService {
     private static service: Service;
 
     public static getService(): Service {
@@ -9,7 +10,7 @@ export class Service {
         return Service.service;
     }
 
-    async getApis() {
+    public async getApis() {
         let simpsonsApi = "https://thesimpsonsapi.com/api/characters";
         let rickAndMortyApi = "https://rickandmortyapi.com/api/chaacter";
         let ghibliApi = "https://ghibliapi.vercel.app/films";

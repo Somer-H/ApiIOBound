@@ -1,13 +1,23 @@
-import { Service } from "../service/service";
+import { IService } from "../service/IService";
+export class Controller {
+    private static controller: Controller;
+    public static getController(service: IService): Controller {
+        if (!Controller.controller) {
+            Controller.controller = new Controller(service);
+        }
+        return Controller.controller;
+    }
 
-export async function getApisController(): Promise<Response> {
-  try {
-    const results = await Service.getService().getApis();
-    const resolved = await Promise.all(results);
-    return Response.json({ success: true, data: resolved });
-  } catch (err) {
-    const errorMessage =
-      err instanceof Error ? err.message : "Error desconocido";
-    return Response.json({ success: false, error: errorMessage }, { status: 500 });
-  }
+    constructor(private service: IService) {}
+    public async getApisController(): Promise<Response> {
+    try {
+        const results = await this.service.getApis();
+        const resolved = await Promise.all(results);
+        return Response.json({ success: true, data: resolved });
+    } catch (err) {
+        const errorMessage =
+            err instanceof Error ? err.message : "Error desconocido";
+        return Response.json({ success: false, error: errorMessage }, { status: 500 });
+    }
+}
 }
