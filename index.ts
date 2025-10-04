@@ -1,1 +1,2 @@
-console.log("Hello via Bun!");
+import { startCluster } from "./src/cluster/cluster";
+startCluster("./server");
