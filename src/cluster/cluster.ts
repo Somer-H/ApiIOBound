@@ -2,7 +2,7 @@ import  cluster from "cluster";
 import os from "os";
 
 const numCPUs = os.cpus().length;
-
+let finalKilled = false; 
 export function startCluster(path: string) {
   if (cluster.isPrimary) {
     console.log(`Primary ${process.pid} iniciado con ${numCPUs} núcleos`);
@@ -31,7 +31,7 @@ export function startCluster(path: string) {
 
     cluster.on("exit", (worker, code, signal) => {
       console.log(`Worker ${worker.id} murió (code: ${code}, signal: ${signal})`);
-      if (!worker.exitedAfterDisconnect) {
+      if (!finalKilled && !worker.exitedAfterDisconnect) {
         console.log(" Reiniciando worker...");
         cluster.fork();
       }
@@ -48,10 +48,11 @@ export function startCluster(path: string) {
     process.on("SIGTERM", killCluster);
 
     function killCluster() {
+        finalKilled = true;
       for (const id in cluster.workers) {
         cluster.workers[id]?.process.kill();
       }
-      console.log("🛑 Cluster detenido por señal");
+      console.log("Cluster detenido por señal");
     }
   } else {
     import(path);

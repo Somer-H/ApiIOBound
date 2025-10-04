@@ -1,2 +1,2 @@
 import { startCluster } from "./src/cluster/cluster";
-startCluster("./server");
+startCluster("../server.ts");

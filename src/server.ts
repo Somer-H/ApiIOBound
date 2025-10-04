@@ -1,8 +1,8 @@
-const port = Number(process.env.PORT) || 3000;
+import { router } from "./route/router";
 
 Bun.serve({
-  port,
+  port: 3000,
   fetch(req) {
-    return new Response(`Hola desde el worker en puerto ${port}`);
+    return router(req);
   },
 });
