@@ -1,4 +1,4 @@
-import { IService } from "../service/IService";
+import { IService } from "../service/iservice";
 export class Controller {
     private static controller: Controller;
     public static getController(service: IService): Controller {
