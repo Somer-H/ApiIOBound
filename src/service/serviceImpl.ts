@@ -19,7 +19,6 @@ export class Service implements IService {
 
     public async getApis() {
         let simpsonsApi = "https://thesimpsonsapi.com/api/characters";
-        let rickAndMortyApi = "https://rickandmortyapi.com/api/character";
         let ghibliApi = "https://ghibliapi.vercel.app/films";
         let catApi = "https://catfact.ninja/facts";
         let jsonApi = "https://jsonplaceholder.typicode.com/todos";
@@ -30,7 +29,6 @@ export class Service implements IService {
         let openApi = "https://opentdb.com/api.php?amount=200"
         
         const simpsonsResponse = this.workerPool.execute(simpsonsApi);
-        const rickAndMortyResponse = this.workerPool.execute(rickAndMortyApi);
         const ghibliResponse = this.workerPool.execute(ghibliApi);
         const catResponse = this.workerPool.execute(catApi);
         const jsonResponse = this.workerPool.execute(jsonApi);
@@ -40,6 +38,6 @@ export class Service implements IService {
         const meteoResponse = this.workerPool.execute(meteoApi);
         const openResponse = this.workerPool.execute(openApi);
         
-        return [simpsonsResponse, rickAndMortyResponse, ghibliResponse, catResponse, jsonResponse, swResponse, fictionResponse, dogsResponse, meteoResponse, openResponse];
+        return [simpsonsResponse, ghibliResponse, catResponse, jsonResponse, swResponse, fictionResponse, dogsResponse, meteoResponse, openResponse];
     }
 }

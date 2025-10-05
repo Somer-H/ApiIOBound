@@ -1,4 +1,3 @@
-// cluster.ts - SIMPLIFICADO
 import cluster from "cluster";
 import os from "os";
 

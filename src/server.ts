@@ -1,4 +1,3 @@
-// server.ts
 import { router } from "./route/router";
 
 const PORT = parseInt(process.env.WORKER_PORT || "3000");

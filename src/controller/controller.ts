@@ -17,6 +17,7 @@ export class Controller {
     } catch (err) {
         const errorMessage =
             err instanceof Error ? err.message : "Error desconocido";
+        console.error("Error en getApisController:", errorMessage);
         return Response.json({ success: false, error: errorMessage }, { status: 500 });
     }
 }
